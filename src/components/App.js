@@ -3,7 +3,7 @@ import firebase from 'firebase'
 import uid from 'uid'
 
 import FileUpload from './FileUpload'
-import './App.css'
+import '../styles/App.css'
 
 class App extends Component {
   constructor () {
@@ -18,6 +18,7 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this)
     this.handleUpload = this.handleUpload.bind(this)
     this.setPercentage = this.setPercentage.bind(this)
+    this.resetPercentage = this.resetPercentage.bind(this)
     this.handleErrorUpload = this.handleErrorUpload.bind(this)
   }
 
@@ -26,9 +27,19 @@ class App extends Component {
       this.setState({ user })
     })
 
-    firebase.database().ref('pictures').on('child_added', snapshot => {
+    const picturesRef = firebase.database().ref('pictures')
+
+    picturesRef.on('child_added', snapshot => {
       this.setState({
         pictures: this.state.pictures.concat(snapshot.val())
+      })
+    })
+
+    picturesRef.on('child_removed', snapshot => {
+      this.setState({
+        pictures: this.state.pictures.filter(picture =>
+          picture.id !== snapshot.val().id
+        )
       })
     })
   }
@@ -57,14 +68,17 @@ class App extends Component {
       this.handleErrorUpload,
       () => {
         const record = {
+          id: uid(),
           photoURL: this.state.user.photoURL,
           displayName: this.state.user.displayName,
-          image: task.snapshot.downloadURL
+          image: task.snapshot.downloadURL,
+          path: task.snapshot.ref.location.path,
         }
 
         const dbRef = firebase.database().ref('pictures')
         const newPicture = dbRef.push()
         newPicture.set(record)
+        this.resetPercentage()
       }
     )
   }
@@ -73,6 +87,12 @@ class App extends Component {
     let percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
     this.setState({
       uploadValue: percentage
+    })
+  }
+
+  resetPercentage () {
+    this.setState({
+      uploadValue: 0
     })
   }
 
@@ -93,7 +113,7 @@ class App extends Component {
 
           {
             this.state.pictures.map(picture => (
-              <div key={uid()}>
+              <div key={picture.id}>
                 <img src={picture.image} alt="" />
                 <br/>
                 <img src={picture.photoURL} alt={picture.displayName} />
