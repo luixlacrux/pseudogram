@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import uid from 'uid'
 
+import Navbar from './Navbar'
 import FileUpload from './FileUpload'
-import '../styles/App.css'
+// import '../App.scss'
 
 class App extends Component {
   constructor () {
@@ -132,14 +133,15 @@ class App extends Component {
 
   render () {
     return (
-      <div className="App">
+      <section className="App">
+        <Navbar />
         <div className="App-header">
           <h2>Pseudogram</h2>
         </div>
         <div className="App-intro">
           {this.renderLoginButton()}
         </div>
-      </div>
+      </section>
     )
   }
 }

@@ -5,6 +5,14 @@ import firebaseConfig from './utils/firebase'
 import App from './components/App'
 import './styles/index.css'
 
+import WebFontLoader from 'webfontloader';
+
+WebFontLoader.load({
+  google: {
+    families: ['Roboto:300,400,500,700', 'Material Icons'],
+  },
+});
+
 firebase.initializeApp(firebaseConfig)
 
 ReactDOM.render(
