@@ -4,7 +4,7 @@ import uid from 'uid'
 
 import Navbar from './Navbar'
 import FileUpload from './FileUpload'
-// import '../App.scss'
+import PhotoGrid from './PhotoGrid'
 
 class App extends Component {
   constructor () {
@@ -108,17 +108,7 @@ class App extends Component {
         <div>
           <h3>Sube un foto para compartir!</h3>
           <FileUpload onUpload={this.handleUpload} uploadValue={this.state.uploadValue} />
-          {
-            this.state.pictures.map(picture => (
-              <div key={picture.id}>
-                <img src={picture.image} alt="" />
-                <br/>
-                <img src={picture.photoURL} alt={picture.displayName} />
-                <br/>
-                <span>{picture.displayName}</span>
-              </div>
-            ))
-          }
+          <PhotoGrid posts={this.state.pictures} />
         </div>
       )
     } else {
