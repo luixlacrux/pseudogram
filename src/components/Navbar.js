@@ -5,11 +5,11 @@ import '../styles/navbar.css'
 
 import NavbarMenu from './NavbarMenu'
 
-function Navbar () {
+function Navbar (props) {
   const actions = [
     <Button key="search" icon>search</Button>,
     <Button key="favorite" icon>favorite</Button>,
-    <NavbarMenu />,
+    <NavbarMenu {...props} />,
   ]
 
   return (

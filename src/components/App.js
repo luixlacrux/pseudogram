@@ -106,12 +106,8 @@ class App extends Component {
     if (this.state.user) {
       return (
         <div>
-          <img width="80" src={this.state.user.photoURL} alt={this.state.user.displayName}/>
-          <p>Hola, {this.state.user.displayName}!</p>
-          <button onClick={this.handleLogout}>Logout</button>
-
+          <h3>Sube un foto para compartir!</h3>
           <FileUpload onUpload={this.handleUpload} uploadValue={this.state.uploadValue} />
-
           {
             this.state.pictures.map(picture => (
               <div key={picture.id}>
@@ -132,12 +128,15 @@ class App extends Component {
   }
 
   render () {
+    const { photoURL, displayName } = this.state.user || {}
+
     return (
       <section className="App">
-        <Navbar />
-        <div className="App-header">
-          <h2>Pseudogram</h2>
-        </div>
+        <Navbar
+          photoURL={photoURL}
+          displayName={displayName}
+          onLogout={this.handleLogout}
+        />
         <div className="App-intro">
           {this.renderLoginButton()}
         </div>
