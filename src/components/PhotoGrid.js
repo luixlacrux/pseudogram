@@ -11,6 +11,7 @@ function PhotoGrid ({ posts }) {
           id={post.id}
           image={post.image}
           owner={post.owner}
+          createdAt={post.createdAt}
         />
       )}
     </div>

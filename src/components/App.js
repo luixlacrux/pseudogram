@@ -33,7 +33,10 @@ class App extends Component {
       const picture = Object.assign({}, snapshot.val(), { id: snapshot.key })
 
       this.setState({
-        pictures: this.state.pictures.concat(picture)
+        pictures: [
+          picture,
+          ...this.state.pictures
+        ]
       })
     })
 
@@ -78,6 +81,7 @@ class App extends Component {
             photoURL,
             displayName,
           },
+          createdAt: Date.now(),
         }
 
         const dbRef = firebase.database().ref('pictures')
