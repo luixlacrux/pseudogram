@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
-import genUid from 'uid'
 
 import Navbar from './Navbar'
 import FileUpload from './FileUpload'
@@ -31,15 +30,17 @@ class App extends Component {
     const picturesRef = firebase.database().ref('pictures')
 
     picturesRef.on('child_added', snapshot => {
+      const picture = Object.assign({}, snapshot.val(), { id: snapshot.key })
+
       this.setState({
-        pictures: this.state.pictures.concat(snapshot.val())
+        pictures: this.state.pictures.concat(picture)
       })
     })
 
     picturesRef.on('child_removed', snapshot => {
       this.setState({
         pictures: this.state.pictures.filter(picture =>
-          picture.id !== snapshot.val().id
+          picture.id !== snapshot.key
         )
       })
     })
@@ -70,7 +71,6 @@ class App extends Component {
       this.handleErrorUpload,
       () => {
         const record = {
-          id: genUid(),
           image: task.snapshot.downloadURL,
           path: task.snapshot.ref.location.path,
           owner: {
