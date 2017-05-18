@@ -10,8 +10,7 @@ function PhotoGrid ({ posts }) {
           key={post.id}
           id={post.id}
           image={post.image}
-          photoURL={post.photoURL}
-          displayName={post.displayName}
+          owner={post.owner}
         />
       )}
     </div>

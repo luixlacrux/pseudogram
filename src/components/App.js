@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
-import uid from 'uid'
+import genUid from 'uid'
 
 import Navbar from './Navbar'
 import FileUpload from './FileUpload'
@@ -60,6 +60,7 @@ class App extends Component {
   }
 
   handleUpload (event) {
+    const { uid, photoURL, displayName } = this.state.user
     const file = event.target.files[0]
     const storageRef = new firebase.storage().ref(`/photos/${file.name}`)
     const task = storageRef.put(file)
@@ -69,11 +70,14 @@ class App extends Component {
       this.handleErrorUpload,
       () => {
         const record = {
-          id: uid(),
-          photoURL: this.state.user.photoURL,
-          displayName: this.state.user.displayName,
+          id: genUid(),
           image: task.snapshot.downloadURL,
           path: task.snapshot.ref.location.path,
+          owner: {
+            uid,
+            photoURL,
+            displayName,
+          },
         }
 
         const dbRef = firebase.database().ref('pictures')
