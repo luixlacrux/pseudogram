@@ -10,7 +10,7 @@ class App extends Component {
     super()
     this.state = {
       user: null,
-      uploadValue: 0,
+      uploadValue: null,
       pictures: []
     }
 
@@ -63,9 +63,8 @@ class App extends Component {
       .catch(error => console.log(`Error ${error.code}: ${error.message}`))
   }
 
-  handleUpload (event) {
+  handleUpload (file) {
     const { uid, photoURL, displayName } = this.state.user
-    const file = event.target.files[0]
     const storageRef = new firebase.storage().ref(`/photos/${file.name}`)
     const task = storageRef.put(file)
 
@@ -101,7 +100,7 @@ class App extends Component {
 
   resetPercentage () {
     this.setState({
-      uploadValue: 0
+      uploadValue: null
     })
   }
 
@@ -114,7 +113,6 @@ class App extends Component {
     if (this.state.user) {
       return (
         <div>
-          <h3>Sube un foto para compartir!</h3>
           <FileUpload onUpload={this.handleUpload} uploadValue={this.state.uploadValue} />
           <PhotoGrid posts={this.state.pictures} />
         </div>

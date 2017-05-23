@@ -1,13 +1,13 @@
 import React from 'react'
+import ProgressBar from './ProgressBar'
+import FileInput from './FileInput'
+import '../styles/fileUpload.css'
 
 function FileUpload ({ uploadValue, onUpload }) {
   return (
-    <div>
-      <progress value={uploadValue} max="100">
-        {uploadValue}
-      </progress>
-      <br/>
-      <input type="file" onChange={onUpload}/>
+    <div className="FileUpload">
+      <ProgressBar uploadValue={uploadValue} />
+      <FileInput onUpload={onUpload} />
     </div>
   )
 }
