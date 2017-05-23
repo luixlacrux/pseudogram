@@ -16,7 +16,8 @@ function Navbar (props) {
     <Toolbar
       colored
       className="Navbar"
-      title="PseudoGram"
+      title="Pseudogram"
+      titleClassName="Title"
       actions={actions}
     />
   )

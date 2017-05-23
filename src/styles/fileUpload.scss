@@ -3,12 +3,13 @@
 .FileUpload {
   max-width: 600px;
   margin: 0 auto;
-  text-align: right;
+  text-align: center;
   padding: 10px 5px;
 }
 
 @media (min-width: 640px) {
   .FileUpload {
+    text-align: right;
     padding: 30px 0 0;
   }
 }

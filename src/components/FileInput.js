@@ -11,7 +11,7 @@ export default function ({ onUpload }) {
       id="imageInput"
       onChange={handleFileSelect}
       accept="image/*"
-      primary
+      secondary
       iconBefore
       label="Subir una Foto"
     />
