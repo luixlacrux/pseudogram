@@ -3,8 +3,12 @@ import firebase from 'firebase'
 import Button from 'react-md/lib/Buttons'
 
 
-function DeleteButton ({ photoId }) {
+function DeleteButton ({ photoId, path, }) {
   const handleOnClick = e => {
+    firebase.storage().ref(path).delete()
+      .then(() => console.log('Image deleted successfully'))
+      .catch(err => console.error('Oops something has gone wrong', err))
+
     const dbRef = firebase.database().ref('pictures')
     dbRef.child(photoId).remove()
   }

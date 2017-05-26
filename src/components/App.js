@@ -65,7 +65,7 @@ class App extends Component {
 
   handleUpload (file) {
     const { uid, photoURL, displayName } = this.state.user
-    const storageRef = new firebase.storage().ref(`/photos/${file.name}`)
+    const storageRef = new firebase.storage().ref(`/photos/${uid}/${file.name}`)
     const task = storageRef.put(file)
 
     task.on('state_changed',

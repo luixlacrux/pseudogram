@@ -31,11 +31,11 @@ class Photo extends PureComponent {
   }
 
   render () {
-    const { id, image, owner, } = this.props
+    const { id, image, owner, path, } = this.props
 
     const avatar = <UserAvatar photoURL={owner.photoURL} />
     const deleteButton = this.state.user.uid === owner.uid
-    ? <DeleteButton photoId={id} /> : null
+    ? <DeleteButton photoId={id} path={path} /> : null
 
     return (
       <Card className="Photo">

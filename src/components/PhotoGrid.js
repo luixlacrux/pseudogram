@@ -10,6 +10,7 @@ function PhotoGrid ({ posts }) {
           key={post.id}
           id={post.id}
           image={post.image}
+          path={post.path}
           owner={post.owner}
           createdAt={post.createdAt}
         />
