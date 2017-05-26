@@ -17,9 +17,13 @@ class Photo extends PureComponent {
     user: firebase.auth().currentUser,
   }
 
+  componentWillUnmount() {
+    if (this._interval) { clearInterval(this._interval); }
+  }
+
   componentDidMount () {
     // update every 3 min
-    setInterval(() => {
+    this._interval = setInterval(() => {
       this.setState({
         relativeTime: moment(this.props.createdAt).fromNow(),
       })
