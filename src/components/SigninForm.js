@@ -3,7 +3,7 @@ import TextField from 'react-md/lib/TextFields'
 import Button from 'react-md/lib/Buttons/Button'
 
 const SigninForm = () => (
-  <form className="md-grid">
+  <form className="SignInForm md-grid">
     <TextField
       id="signup-email"
       label="Correo electronico"
@@ -30,7 +30,7 @@ const SigninForm = () => (
       className="md-cell md-cell--12"
       required
     />
-    <Button raised primary label="Registrarse" className="md-cell md-cell-12" />
+    <Button raised primary label="Registrarse" className="md-cell md-cell--8" />
   </form>
 )
 

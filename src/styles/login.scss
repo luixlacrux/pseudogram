@@ -1,0 +1,38 @@
+.Login {
+  justify-content: center;
+  &-title {
+    font-size: 4em;
+    color: black;
+    text-align: center;
+    margin: 16px 0;
+  }
+  &-subtitle {
+    color: #999;
+    font-size: 1.3em;
+    font-weight: bold;
+    text-align: center;
+  }
+  &-container {
+    padding: 0.5em;
+  }
+}
+
+.social-btns {
+  justify-content: center;
+}
+.SignInForm {
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .Login-container {
+    max-width: 400px;
+    border: 1px solid #e6e6e6;
+    background-color: #fefefe;
+  }
+}
+@media (min-width: 1024px) {
+  .social-btns button {
+    margin-bottom: 12px;
+  }
+}
