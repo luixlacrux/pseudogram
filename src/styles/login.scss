@@ -1,15 +1,27 @@
+@import 'globals';
+
+@mixin line-divider($right, $left) {
+  content: '';
+  flex: 1;
+  margin-right: $right;
+  margin-left: $left;
+  height: 1px;
+  background: $md-grey-400;
+}
+
 .Login {
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   &-title {
     font-size: 4em;
-    color: black;
+    color: $md-grey-900;
     text-align: center;
     margin: 16px 0;
   }
   &-subtitle {
-    color: #999;
+    color: $md-grey-500;
     font-size: 1.3em;
     font-weight: bold;
     text-align: center;
@@ -17,12 +29,31 @@
   &-container {
     padding: 0.5em;
   }
+  &-box {
+    text-align: center;
+    p {
+      margin: 0.5em 0;
+    }
+  }
+  &-divider {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    color: $md-grey-500;
+    font-weight: bold;
+    &:before {
+      @include line-divider(1em, 0);
+    }
+    &:after {
+      @include line-divider(0, 1em);
+    }
+  }
 }
 
 .social-btns {
   justify-content: center;
 }
-.SignInForm {
+.SignUpForm {
   justify-content: center;
 }
 
@@ -34,7 +65,7 @@
   }
 }
 @media (min-width: 1024px) {
-  .social-btns button {
+  .social-btns button:first-child {
     margin-bottom: 12px;
   }
 }

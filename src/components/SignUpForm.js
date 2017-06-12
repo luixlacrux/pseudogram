@@ -2,8 +2,8 @@ import React from 'react'
 import TextField from 'react-md/lib/TextFields'
 import Button from 'react-md/lib/Buttons/Button'
 
-const SigninForm = () => (
-  <form className="SignInForm md-grid">
+const SignUpForm = () => (
+  <form className="SignUpForm md-grid">
     <TextField
       id="signup-email"
       label="Correo electronico"
@@ -34,4 +34,4 @@ const SigninForm = () => (
   </form>
 )
 
-export default SigninForm
+export default SignUpForm

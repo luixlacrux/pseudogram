@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 import Button from 'react-md/lib/Buttons/Button'
 import '../styles/login.css'
 
-import SigninForm from '../components/SigninForm'
+import SignUpForm from '../components/SignUpForm'
 
 const Login = ({ user, location, dispatch }) => {
   const handleLogin = () => {
@@ -39,10 +39,12 @@ const Login = ({ user, location, dispatch }) => {
               onClick={handleLogin}
               className="md-cell md-cell--11"
             />
+            <div className="Login-divider md-cell md-cell--12">OR</div>
           </div>
-
-          <div className="md-divider-border md-divider-border--below" />
-          <SigninForm />
+          <SignUpForm />
+        </div>
+        <div className="Login-box Login-container md-cell md-cell--6-tablet md-cell--5-desktop">
+          <p>¿Ya tienes cuenta? <a href="#!">Inicia sessión</a></p>
         </div>
       </section>
     )
