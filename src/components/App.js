@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import DocumentTitle from 'react-document-title'
 import firebase from 'firebase'
 
 import Navbar from './Navbar'
@@ -127,16 +128,18 @@ class App extends Component {
     const { photoURL, displayName } = this.state.user || {}
 
     return (
-      <section className="App">
-        <Navbar
-          photoURL={photoURL}
-          displayName={displayName}
-          onLogout={this.handleLogout}
-        />
-        <div className="App-intro">
-          {this.renderLoginButton()}
-        </div>
-      </section>
+      <DocumentTitle title="Pseudogram">
+        <section className="App">
+          <Navbar
+            photoURL={photoURL}
+            displayName={displayName}
+            onLogout={this.handleLogout}
+          />
+          <div className="App-intro">
+            {this.renderLoginButton()}
+          </div>
+        </section>
+      </DocumentTitle>
     )
   }
 }
