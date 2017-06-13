@@ -4,6 +4,18 @@ export const SIGN_OUT_USER = 'SIGN_OUT_USER'
 export const AUTH_ERROR = 'AUTH_ERROR'
 export const AUTH_USER = 'AUTH_USER'
 
+export function signUpUser (crendentials) {
+  return dispatch => {
+    firebase.auth()
+      .createUserWithEmailAndPassword(crendentials.email, crendentials.password)
+      .then(response => dispatch(authUser()))
+      .catch(error => {
+        console.error(error)
+        dispatch(authError(error))
+      })
+  }
+}
+
 export function signInUser (credentials) {
   return dispatch => {
     firebase.auth()
