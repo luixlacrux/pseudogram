@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom'
 import * as Actions from '../actions'
 import '../styles/login.css'
 
-import TextField from 'react-md/lib/TextFields'
 import Button from 'react-md/lib/Buttons/Button'
 
 import SocialButtons from '../components/SocialButtons'
+import FormTextField from '../components/FormTextField'
 
 const validate = values => {
   const errors = {}
@@ -27,10 +27,6 @@ const validate = values => {
 
   return errors
 }
-
-const renderTextField = ({ input, meta: { touched, error }, ...others }) => (
-  <TextField {...input} {...others} error={touched && !!error} errorText={error} />
-)
 
 const SignIn = ({ location, signInUser, handleSubmit, authenticatedError }) => {
   const handleLogin = () => console.log('social login.')
@@ -52,7 +48,7 @@ const SignIn = ({ location, signInUser, handleSubmit, authenticatedError }) => {
             <Field
               id="signin-email"
               name="email"
-              component={renderTextField}
+              component={FormTextField}
               type="text"
               label="Correo electronico"
               className="md-cell md-cell--12"
@@ -61,7 +57,7 @@ const SignIn = ({ location, signInUser, handleSubmit, authenticatedError }) => {
             <Field
               id="signin-password"
               name="password"
-              component={renderTextField}
+              component={FormTextField}
               label="Contrasena"
               type="password"
               className="md-cell md-cell--12"
