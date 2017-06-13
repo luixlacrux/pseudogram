@@ -6,9 +6,9 @@ import App from '../components/App'
 import SignIn from '../containers/SignIn'
 import SignUp from '../containers/SignUp'
 
-const PrivateRoute = ({ user, component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    user.isAuth ? (
+const PrivateRoute = ({ component: Component, authenticated, ...props }) => (
+  <Route {...props} render={props => (
+    authenticated ? (
       <Component {...props} />
     ) : (
       <Redirect to={{
@@ -19,20 +19,28 @@ const PrivateRoute = ({ user, component: Component, ...rest }) => (
   )} />
 )
 
+const PublicRoute = ({ component: Component, authenticated, ...props }) => (
+  <Route {...props} render={props => (
+    !authenticated
+      ? <Component {...props} />
+      : <Redirect to="/" />
+  )}/>
+)
+
 const NotFound = () => <h1>404 Not Found</h1>
 
-const Routes = ({ user }) => (
+const Routes = ({ authenticated }) => (
   <Switch>
-    <PrivateRoute path="/" exact component={App} user={user} />
-    <Route path="/signin"  component={SignIn} />
-    <Route path="/signup" component={SignUp} />
+    <PrivateRoute path="/" exact component={App} authenticated={authenticated} />
+    <PublicRoute path="/signin"  component={SignIn} authenticated={authenticated} />
+    <PublicRoute path="/signup" component={SignUp} authenticated={authenticated} />
     <Route component={NotFound} />
   </Switch>
 )
 
 function mapStateToProps (state = {}) {
   return {
-    user: state.user
+    authenticated: state.auth.authenticated,
   }
 }
 
