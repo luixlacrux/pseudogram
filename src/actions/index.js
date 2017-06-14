@@ -15,6 +15,17 @@ export function signUpUser (crendentials) {
   }
 }
 
+export function socialLoginUser (provider) {
+  return dispatch => {
+    firebase.auth()
+      .signInWithPopup(provider)
+      .catch(error => {
+        console.error(error)
+        dispatch(authError(error))
+      })
+  }
+}
+
 export function signInUser (credentials) {
   return dispatch => {
     firebase.auth()

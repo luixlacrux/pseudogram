@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from 'react-md/lib/Buttons/Button'
-import * as Actions from '../actions'
+import { signUpUser, socialLoginUser } from '../actions'
 import '../styles/login.css'
 
 import SocialButtons from '../components/SocialButtons'
@@ -35,9 +35,13 @@ const validate = (values) => {
   return errors
 }
 
-const SignUp = ({ location, signUpUser, handleSubmit, authenticatedError }) => {
-  const handleLogin = () => console.log('social login.')
-
+const SignUp = ({
+  location,
+  signUpUser,
+  socialLoginUser,
+  handleSubmit,
+  authenticatedError
+}) => {
   const handleFormSubmit = (values) => {
     signUpUser(values)
   }
@@ -48,7 +52,7 @@ const SignUp = ({ location, signUpUser, handleSubmit, authenticatedError }) => {
         <div className="Login-container md-cell md-cell--6-tablet md-cell--5-desktop">
           <h1 className="Login-title Title">Pseudogram</h1>
           <h2 className="Login-subtitle">Registraté para ver y compartir fotos.</h2>
-          <SocialButtons handleLogin={handleLogin} />
+          <SocialButtons handleLogin={socialLoginUser} />
 
           {authenticatedError &&
             <p style={{color: 'red', textAlign: 'center'}}>{authenticatedError}</p>
@@ -118,7 +122,10 @@ function mapStateToProps (state = {}) {
   }
 }
 
-export default connect(mapStateToProps, Actions)(reduxForm({
+export default connect(mapStateToProps, {
+  signUpUser,
+  socialLoginUser,
+})(reduxForm({
   form: 'signup',
   validate,
 })(SignUp))

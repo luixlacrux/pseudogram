@@ -4,7 +4,7 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
-import * as Actions from '../actions'
+import { signInUser, socialLoginUser } from '../actions'
 import '../styles/login.css'
 
 import Button from 'react-md/lib/Buttons/Button'
@@ -28,9 +28,13 @@ const validate = values => {
   return errors
 }
 
-const SignIn = ({ location, signInUser, handleSubmit, authenticatedError }) => {
-  const handleLogin = () => console.log('social login.')
-
+const SignIn = ({
+  location,
+  signInUser,
+  socialLoginUser,
+  handleSubmit,
+  authenticatedError
+}) => {
   const handleFormSubmit = (values) => {
     signInUser(values)
   }
@@ -40,7 +44,7 @@ const SignIn = ({ location, signInUser, handleSubmit, authenticatedError }) => {
       <section className="Login md-grid">
         <div className="Login-container md-cell md-cell--6-tablet md-cell--5-desktop">
           <h1 className="Login-title Title">Pseudogram</h1>
-          <SocialButtons handleLogin={handleLogin} />
+          <SocialButtons handleLogin={socialLoginUser} />
 
           {authenticatedError && <p style={{color: 'red'}}>{authenticatedError}</p>}
 
@@ -93,7 +97,10 @@ function mapStateToProps (state = {}) {
   }
 }
 
-export default connect(mapStateToProps, Actions)(reduxForm({
+export default connect(mapStateToProps, {
+  signInUser,
+  socialLoginUser,
+})(reduxForm({
   form: 'signin',
   validate,
 })(SignIn))
