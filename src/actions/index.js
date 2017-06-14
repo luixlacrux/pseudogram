@@ -8,7 +8,6 @@ export function signUpUser (crendentials) {
   return dispatch => {
     firebase.auth()
       .createUserWithEmailAndPassword(crendentials.email, crendentials.password)
-      .then(response => dispatch(authUser()))
       .catch(error => {
         console.error(error)
         dispatch(authError(error))
@@ -20,7 +19,6 @@ export function signInUser (credentials) {
   return dispatch => {
     firebase.auth()
       .signInWithEmailAndPassword(credentials.email, credentials.password)
-        .then(response => dispatch(authUser()))
         .catch(error => {
           console.error(error)
           dispatch(authError(error))
@@ -38,15 +36,16 @@ export function signOutUser () {
 export function verifyAuth () {
   return dispatch => {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) dispatch(authUser())
+      if (user) dispatch(authUser(user))
       else dispatch(signOutUser())
     })
   }
 }
 
-export function authUser () {
+export function authUser (user) {
   return {
     type: AUTH_USER,
+    user,
   }
 }
 

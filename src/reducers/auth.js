@@ -1,6 +1,7 @@
 import { AUTH_USER, SIGN_OUT_USER, AUTH_ERROR } from '../actions'
 
 const initialState =  {
+    user: null,
     authenticated: false,
     error: null
 }
@@ -10,12 +11,14 @@ export default function auth (state = initialState, action) {
     case AUTH_USER:
       return {
         ...state,
+        user: action.user,
         authenticated: true,
         error: null,
       }
     case SIGN_OUT_USER:
       return {
         ...state,
+        user: null,
         authenticated: false,
         error: null,
       }
