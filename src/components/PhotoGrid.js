@@ -5,15 +5,8 @@ import '../styles/photo.css'
 function PhotoGrid ({ posts }) {
   return (
     <div className="PhotoGrid">
-      {posts.map(post =>
-        <Photo
-          key={post.id}
-          id={post.id}
-          image={post.image}
-          path={post.path}
-          owner={post.owner}
-          createdAt={post.createdAt}
-        />
+      {posts.map((post, i) =>
+        <Photo key={i} {...post} />
       )}
     </div>
   )

@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Switch, Route, Link } from 'react-router-dom'
 import { signOutUser } from '../actions/auth'
 
+import Home from '../containers/Home'
 import Navbar from '../components/Navbar'
 
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
           />
           <div className="App-intro">
             <Switch>
-              <Route path="/" exact render={() => <h1>Home <Link to="/photo/1">Photo 1</Link></h1>} />
+              <Route path="/" exact component={Home} />
               <Route path="/photo/:id" render={() => <h1>Photo 1 <Link to="/">Home</Link></h1>} />
               <Route render={() => <h1>Not Found</h1>} />
             </Switch>
