@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Switch, Route, Link } from 'react-router-dom'
-import { signOutUser } from '../actions'
+import { signOutUser } from '../actions/auth'
 
 import Navbar from '../components/Navbar'
 

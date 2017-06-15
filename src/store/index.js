@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import rootReducer from '../reducers'
-import { verifyAuth } from '../actions'
+import { verifyAuth } from '../actions/auth'
 
 const logger = createLogger()
 

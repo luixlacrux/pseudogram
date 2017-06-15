@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from 'react-md/lib/Buttons/Button'
-import { signUpUser, socialLoginUser } from '../actions'
+import { signUpUser, socialLoginUser } from '../actions/auth'
 import '../styles/login.css'
 
 import SocialButtons from '../components/SocialButtons'

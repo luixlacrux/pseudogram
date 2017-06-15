@@ -4,7 +4,7 @@ import DocumentTitle from 'react-document-title'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
-import { signInUser, socialLoginUser } from '../actions'
+import { signInUser, socialLoginUser } from '../actions/auth'
 import '../styles/login.css'
 
 import Button from 'react-md/lib/Buttons/Button'
