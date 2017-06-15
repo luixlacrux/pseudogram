@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
 import { fetchPhotos } from '../actions/photos'
+import { uploadPhoto } from '../actions/upload'
 
 import Home from '../components/Home'
 
 function mapStateToProps (state) {
+  const { photos, upload, } = state
   return {
-    ...state.photos
+    photos,
+    upload,
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    fetchPhotos: () => dispatch(fetchPhotos())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, {
+  fetchPhotos,
+  uploadPhoto,
+})(Home)
