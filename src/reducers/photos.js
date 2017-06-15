@@ -25,6 +25,7 @@ export default function photos (state = initialState, action) {
         isFetching: false,
         error: null,
         items: Object.keys(photos).map(i => photos[i]),
+        lastUpdate: Date.now(),
       }
     case FAILED_GETTING_PHOTOS:
       return {
