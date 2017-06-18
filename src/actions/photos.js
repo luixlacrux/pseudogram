@@ -3,7 +3,7 @@ import { database } from '../utils/firebase'
 export const REQUEST_PHOTOS = 'REQUEST_PHOTOS'
 export const RECEIVED_PHOTOS = 'RECEIVED_PHOTOS'
 export const FAILED_GETTING_PHOTOS = 'FAILED_GETTING_PHOTOS'
-export const PHOTO_ADDED = 'PHOTO_ADDED'
+export const ADD_PHOTO = 'ADD_PHOTO'
 
 export function requestPhotos () {
   return {
@@ -14,14 +14,17 @@ export function requestPhotos () {
 export function fetchPhotos () {
   return dispatch => {
     dispatch(requestPhotos())
-    return database.ref('/pictures').once('value', snap => {
-      const photos = snap.val()
-      dispatch(showPhotos(photos))
+    return database.ref('/pictures').on('child_added', snap => {
+      const photo = Object.assign({}, snap.val(), { key: snap.key })
+      dispatch(addPhoto(photo))
     })
-    .catch(error => {
-      console.log(error)
-      dispatch(showError(error))
-    })
+  }
+}
+
+export function addPhoto (photo) {
+  return {
+    type: ADD_PHOTO,
+    photo,
   }
 }
 

@@ -2,6 +2,7 @@ import {
   REQUEST_PHOTOS,
   RECEIVED_PHOTOS,
   FAILED_GETTING_PHOTOS,
+  ADD_PHOTO,
 } from '../actions/photos'
 
 const initialState = {
@@ -32,6 +33,16 @@ export default function photos (state = initialState, action) {
         ...state,
         isFetching: false,
         error: action.error,
+      }
+    case ADD_PHOTO:
+      return {
+        ...state,
+        isFetching: false,
+        items: [
+          ...state.items,
+          action.photo,
+        ],
+        lastUpdate: Date.now()
       }
 
     default:
