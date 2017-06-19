@@ -39,8 +39,8 @@ export default function photos (state = initialState, action) {
         ...state,
         isFetching: false,
         items: [
-          ...state.items,
           action.photo,
+          ...state.items,
         ],
         lastUpdate: Date.now()
       }

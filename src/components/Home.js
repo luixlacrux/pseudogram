@@ -35,7 +35,7 @@ class Home extends Component {
           onUpload={uploadPhoto}
           uploadValue={upload.uploadValue}
          />
-        <PhotoGrid posts={photos.items} />
+        <PhotoGrid photos={photos.items} />
       </div>
     )
   }

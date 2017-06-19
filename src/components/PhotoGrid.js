@@ -2,11 +2,11 @@ import React from 'react'
 import Photo from './Photo'
 import '../styles/photo.css'
 
-function PhotoGrid ({ posts }) {
+function PhotoGrid ({ photos }) {
   return (
     <div className="PhotoGrid">
-      {posts.map((post, i) =>
-        <Photo key={i} {...post} />
+      {photos.map((photo, i) =>
+        <Photo key={i} {...photo} />
       )}
     </div>
   )

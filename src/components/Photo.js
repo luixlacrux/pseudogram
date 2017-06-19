@@ -41,7 +41,7 @@ class Photo extends PureComponent {
       <Card className="Photo">
         <CardTitle
           avatar={avatar}
-          title={owner.displayName}
+          title={owner.displayName || 'Anonymous'}
           subtitle={this.state.relativeTime}
           children={deleteButton}
         />

@@ -1,4 +1,5 @@
 import { storage } from '../utils/firebase'
+import { newPhoto } from './photos'
 
 export const START_UPLOAD = 'START_UPLOAD'
 export const PERCENTAGE_UPLOAD = 'PERCENTAGE_UPLOAD'
@@ -15,24 +16,33 @@ export function uploadPhoto (file) {
   return (dispatch, getState) => {
     dispatch(startUpload())
 
-    const { uid } = getState().auth.user
+    const { uid, displayName, photoURL } = getState().auth.user
     const task = storage.ref(`/photos/${uid}/${file.name}`).put(file)
 
     task.on('state_changed',
       (snap) => dispatch(setPercentageUpload(snap)),
       (error) => dispatch(errorUpload(error)),
-      () => dispatch(successUpload(task)),
+      () => {
+        const photo = {
+          image: task.snapshot.downloadURL,
+          path: task.snapshot.ref.location.path,
+          createdAt: Date.now(),
+          owner: {
+            uid,
+            displayName,
+            photoURL,
+          }
+        }
+        dispatch(successUpload())
+        dispatch(newPhoto(photo))
+      },
     )
   }
 }
 
-export function successUpload (task) {
+export function successUpload () {
   return {
     type: SUCCESS_UPLOAD,
-    image: {
-      url: task.snapshot.downloadURL,
-      path: task.snapshot.ref.location.path,
-    }
   }
 }
 

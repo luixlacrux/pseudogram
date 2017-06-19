@@ -14,7 +14,7 @@ export default function upload (state = initialState, action) {
   switch (action.type) {
     case START_UPLOAD:
       return {
-        ...state,
+        uploadValue: 0,
         inProgress: true,
         image: null,
       }
@@ -33,7 +33,6 @@ export default function upload (state = initialState, action) {
       return {
         inProgress: false,
         uploadValue: null,
-        image: action.image,
       }
 
     default:
