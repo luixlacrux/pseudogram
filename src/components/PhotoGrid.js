@@ -5,9 +5,12 @@ import '../styles/photo.css'
 function PhotoGrid ({ photos }) {
   return (
     <div className="PhotoGrid">
-      {photos.map((photo, i) =>
-        <Photo key={i} {...photo} />
-      )}
+      {photos.length > 0
+        ? photos.map((photo, i) =>
+            <Photo key={i} {...photo} />
+          )
+        : <h5>Oops is empty :'(</h5>
+      }
     </div>
   )
 }

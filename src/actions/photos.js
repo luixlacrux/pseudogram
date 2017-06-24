@@ -1,10 +1,10 @@
 import { database } from '../utils/firebase'
 
 export const REQUEST_PHOTOS = 'REQUEST_PHOTOS'
-export const RECEIVED_PHOTOS = 'RECEIVED_PHOTOS'
 export const FAILED_GETTING_PHOTOS = 'FAILED_GETTING_PHOTOS'
 export const ADD_PHOTO = 'ADD_PHOTO'
 export const NEW_PHOTO = 'NEW_PHOTO'
+export const EMPTY_PHOTOS = 'EMPTY_PHOTOS'
 
 export function requestPhotos () {
   return {
@@ -15,17 +15,26 @@ export function requestPhotos () {
 export function fetchPhotos () {
   return dispatch => {
     dispatch(requestPhotos())
-    return database.ref('/pictures').on('child_added', snap => {
-      const photo = Object.assign({}, snap.val(), { id: snap.key })
-      dispatch(addPhoto(photo))
+    return database.ref('/pictures').once('value', snap => {
+      const photos = snap.val()
+      if (photos) {
+        Object.keys(photos)
+          .map(i => photos[i])
+          .forEach(photo => dispatch(addPhoto(photo)))
+      } else {
+        dispatch(emptyPhotos())
+      }
+
     })
+    // return database.ref('/pictures').on('child_added', snap => {
+    //   const photo = Object.assign({}, snap.val(), { id: snap.key })
+    //   dispatch(addPhoto(photo))
+    // })
   }
 }
 
 export function newPhoto (photo) {
-  return dispatch => {
-    return database.ref('/pictures').push(photo)
-  }
+  return database.ref('/pictures').push(photo)
 }
 
 export function addPhoto (photo) {
@@ -35,10 +44,9 @@ export function addPhoto (photo) {
   }
 }
 
-export function showPhotos (photos) {
+export function emptyPhotos () {
   return {
-    type: RECEIVED_PHOTOS,
-    photos,
+    type: EMPTY_PHOTOS,
   }
 }
 

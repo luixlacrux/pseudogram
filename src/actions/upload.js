@@ -19,9 +19,9 @@ export function uploadPhoto (file) {
     const { uid, displayName, photoURL } = getState().auth.user
     const task = storage.ref(`/photos/${uid}/${file.name}`).put(file)
 
-    task.on('state_changed',
-      (snap) => dispatch(setPercentageUpload(snap)),
-      (error) => dispatch(errorUpload(error)),
+    return task.on('state_changed',
+      (snap) => {dispatch(setPercentageUpload(snap))},
+      (error) => {dispatch(errorUpload(error))},
       () => {
         const photo = {
           image: task.snapshot.downloadURL,
@@ -34,7 +34,7 @@ export function uploadPhoto (file) {
           }
         }
         dispatch(successUpload())
-        dispatch(newPhoto(photo))
+        newPhoto(photo)
       },
     )
   }

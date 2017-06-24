@@ -1,8 +1,8 @@
 import {
   REQUEST_PHOTOS,
-  RECEIVED_PHOTOS,
   FAILED_GETTING_PHOTOS,
   ADD_PHOTO,
+  EMPTY_PHOTOS,
 } from '../actions/photos'
 
 const initialState = {
@@ -17,16 +17,14 @@ export default function photos (state = initialState, action) {
     case REQUEST_PHOTOS:
       return {
         ...state,
+        items: [],
         isFetching: true,
       }
-    case RECEIVED_PHOTOS:
-      const { photos = [] } = action
+    case EMPTY_PHOTOS:
       return {
         ...state,
+        items: [],
         isFetching: false,
-        error: null,
-        items: Object.keys(photos).map(i => photos[i]),
-        lastUpdate: Date.now(),
       }
     case FAILED_GETTING_PHOTOS:
       return {
