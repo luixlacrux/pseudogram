@@ -2,6 +2,7 @@ import {
   REQUEST_PHOTOS,
   FAILED_GETTING_PHOTOS,
   ADD_PHOTO,
+  REMOVE_PHOTO,
   EMPTY_PHOTOS,
 } from '../actions/photos'
 
@@ -40,6 +41,14 @@ export default function photos (state = initialState, action) {
           action.photo,
           ...state.items,
         ],
+        lastUpdate: Date.now()
+      }
+    case REMOVE_PHOTO:
+      return {
+        ...state,
+        items: state.items.filter(photo => {
+          return photo.id !== action.photo.id
+        }),
         lastUpdate: Date.now()
       }
 
