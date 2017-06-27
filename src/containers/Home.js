@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchPhotos } from '../actions/photos'
+import { initializePhotos } from '../actions/photos'
 import { uploadPhoto } from '../actions/upload'
 
 import Home from '../components/Home'
@@ -13,6 +13,6 @@ function mapStateToProps (state) {
 }
 
 export default connect(mapStateToProps, {
-  fetchPhotos,
+  initializePhotos,
   uploadPhoto,
 })(Home)

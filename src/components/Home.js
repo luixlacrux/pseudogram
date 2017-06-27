@@ -14,12 +14,12 @@ class Home extends Component {
       uploadValue: PropTypes.number,
       error: PropTypes.object,
     }),
-    fetchPhotos: PropTypes.func.isRequired,
+    initializePhotos: PropTypes.func.isRequired,
     uploadPhoto: PropTypes.func.isRequired,
   }
 
   componentDidMount () {
-    this.props.fetchPhotos()
+    this.props.initializePhotos()
   }
 
   render () {
