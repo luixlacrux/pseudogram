@@ -1,5 +1,4 @@
-import { storage } from '../utils/firebase'
-import { newPhoto } from './photos'
+import { storage, picturesAPI } from '../utils/firebase'
 
 export const START_UPLOAD = 'START_UPLOAD'
 export const PERCENTAGE_UPLOAD = 'PERCENTAGE_UPLOAD'
@@ -34,7 +33,8 @@ export function uploadPhoto (file) {
           }
         }
         dispatch(successUpload())
-        newPhoto(photo)
+
+        picturesAPI.add(photo)
       },
     )
   }

@@ -14,4 +14,20 @@ firebase.initializeApp(config)
 export const database = firebase.database()
 export const storage = firebase.storage()
 
+export const picturesAPI = {
+  picturesRef: database.ref('/pictures'),
+
+  add: function (photo) {
+    this.picturesRef.push(photo)
+  },
+
+  remove: function (photoId, path) {
+    storage.ref(path).delete()
+      .then(() => console.log('Image deleted successfully'))
+      .catch(err => console.error('Oops something has gone wrong', err))
+
+    this.picturesRef.child(photoId).remove()
+  }
+}
+
 export default firebase

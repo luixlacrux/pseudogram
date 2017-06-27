@@ -43,10 +43,6 @@ function observeIsRemoved() {
   }
 }
 
-export function newPhoto (photo) {
-  return picturesRef.push(photo)
-}
-
 function addPhoto (photo) {
   return {
     type: ADD_PHOTO,
